@@ -24,7 +24,7 @@ end
 
 # configures db for production using postgresql in heroku
 configure :production do
-	DataMapper.setup(:default, ENV['postgres://oqjtgijcqomgry:MBp8ds4oBmRSLFSrKjn27Eg4S6@ec2-54-225-102-235.compute-1.amazonaws.com:5432/d561jfbeo6aat5'])
+	DataMapper.setup(:default, ENV['DATABASE_URL'])
 end
 
 
