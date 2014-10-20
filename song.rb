@@ -1,6 +1,7 @@
 require 'dm-core'
 require 'dm-migrations'
 
+
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
 # this creates a file called development.db (if it doesnt already exist)
 # which stores all database information, now lets create our song class
@@ -58,7 +59,7 @@ delete '/songs/:id' do
 	redirect to('/songs')
 end
 
-
+ 
 
 
 
