@@ -60,6 +60,8 @@ post '/login' do
 	end
 end
 
+# to log out we destroy the session variable by using clear method for session object, 
+# this router will destroy session and redirect user to login page.
 get '/logout' do
 	session.clear
 	redirect to('/login')
