@@ -23,8 +23,26 @@ GEM
     do_sqlite3 (0.10.14)
       data_objects (= 0.10.14)
     eventmachine (1.0.3)
+    excon (0.40.0)
+    heroku (3.12.1)
+      heroku-api (~> 0.3.19)
+      launchy (>= 0.3.2)
+      netrc (~> 0.7.7)
+      rest-client (= 1.6.7)
+      rubyzip (= 0.9.9)
+    heroku-api (0.3.19)
+      excon (~> 0.38)
+      multi_json (~> 1.8)
+    launchy (2.4.2)
+      addressable (~> 2.3)
+    mime-types (2.4.2)
+    multi_json (1.10.1)
+    netrc (0.7.9)
     pg (0.17.1)
     rack (1.5.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    rubyzip (0.9.9)
     sass (3.4.6)
     sinatra (1.0)
       rack (>= 1.0)
@@ -46,6 +64,7 @@ DEPENDENCIES
   dm-migrations
   dm-postgres-adapter
   dm-sqlite-adapter
+  heroku
   pg
   sass
   sinatra
