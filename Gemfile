@@ -9,7 +9,6 @@ gem "tilt", '~>1.4.1'
 gem "heroku"
 gem "pg", :group => :production
 gem "dm-postgres-adapter", :group => :production
-gem "sqlite-3", :group => :development
 gem "dm-sqlite-adapter", :group => :development
 
 # once Gemfile has been created, we use bundler to install the gems, then lock them down 
