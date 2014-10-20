@@ -10,6 +10,23 @@ configure do
 	set :password, 'sinatra'
 end
 
+configure :development do
+DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+# this creates a file called development.db (if it doesnt already exist)
+# which stores all database information, now lets create our song class
+
+# the include DataMapper::Resource line is how we make any ruby class
+# a DataMapper resource.
+
+# Dont worry where these configure blocks go, they can go anywhere and have multiples
+# the convention is to have one config block thats near top of the file
+end
+
+# configures db for production using postgresql in heroku
+configure :production do
+	DataMapper.setup(:default, ENV['DATABASE_URL'])
+end
+
 
 get('/styles.css'){ scss :styles }
 
