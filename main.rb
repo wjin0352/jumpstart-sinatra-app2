@@ -1,8 +1,8 @@
-require './song'
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require 'slim'
 require 'sass'
+require 'slim'
+require './song'
 
 get('/styles.css'){ scss :styles }
 
