@@ -15,6 +15,12 @@ class Song
 	end
 end
 
+configure do
+	enable :sessions
+	set :username, 'frank'
+	set :password, 'sinatra'
+end
+
 DataMapper.finalize
 
 get '/songs' do
