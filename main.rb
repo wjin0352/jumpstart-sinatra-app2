@@ -1,9 +1,8 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require './song'
 require 'slim'
 require 'sass'
-
+require './song'
 
 configure do
 	enable :sessions
@@ -51,19 +50,7 @@ not_found do
   slim :not_found
 end
 
-# this route grabs name entered in URL and stores it in params hash, problem is the info
-# in the params hash will be available only for that request, so we store it in session hash
-# so it is available for all requests.
-get '/set/:name' do
-	session[:name] = params[:name]
-end
 
-get '/get/hello' do
-	"Hello #{session[:name]}"
-end
-
-# we enabled sessions in the config block above, now we need a login route handler that 
-# displays a view called login that contains a form to be submitted.
 get '/login' do
 	slim :login	
 end
@@ -85,7 +72,19 @@ get '/logout' do
 	redirect to('/login')
 end
 
+# this route grabs name entered in URL and stores it in params hash, problem is the info
+# in the params hash will be available only for that request, so we store it in session hash
+# so it is available for all requests.
+get '/set/:name' do
+	session[:name] = params[:name]
+end
 
+get '/get/hello' do
+	"Hello #{session[:name]}"
+end
+
+# we enabled sessions in the config block above, now we need a login route handler that 
+# displays a view called login that contains a form to be submitted.
 
 
 

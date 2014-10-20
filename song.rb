@@ -29,23 +29,25 @@ get '/songs' do
 end
 
 get '/songs/new' do
+	halt(401, 'Not Authorized') unless session[:admin]
 	@song = Song.new
 	slim :new_song
 end
+
 
 get '/songs/:id' do
   @song = Song.get(params[:id])
   slim :show_song
 end
 
-post '/songs' do
-	song = Song.create(params[:song])
-	redirect to("/songs/#{song.id}")
-end
-
 get '/songs/:id/edit' do
 	@song = Song.get(params[:id])
 	slim :edit_song
+end
+
+post '/songs' do
+	song = Song.create(params[:song])
+	redirect to("/songs/#{song.id}")
 end
 
 put '/songs/:id' do
@@ -59,11 +61,6 @@ delete '/songs/:id' do
 	redirect to('/songs')
 end
 
-get '/songs/new' do
-	halt(401, 'Not Authorized') unless session[:admin]
-	@song = Song.new
-	slim :new_song
-end
 
 
  
