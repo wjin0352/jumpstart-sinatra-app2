@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require 'sass'
 require 'slim'
+require 'sass'
 require './song'
 
 configure do
