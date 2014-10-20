@@ -64,7 +64,7 @@ end
 # we enabled sessions in the config block above, now we need a login route handler that 
 # displays a view called login that contains a form to be submitted.
 get '/login' do
-	slim :login
+	slim :login	
 end
 
 # we need to create a handler to deal with a form being submitted from above
