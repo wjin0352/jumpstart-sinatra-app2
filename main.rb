@@ -5,8 +5,11 @@ require 'slim'
 require 'sass'
 require './song'
 
+configure :development do
 DataMapper.setup(:default, 'postgres://localhost/sinatra1')
 # DataMapper.finalize.auto_upgrade!
+ end
+
 
 configure do
 	enable :sessions
@@ -16,6 +19,8 @@ end
 
 # configure :development do
 # 	DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+# end
+
 # this creates a file called development.db (if it doesnt already exist)
 # which stores all database information, now lets create our song class
 
