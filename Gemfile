@@ -8,6 +8,7 @@ gem "thin"
 gem "pg", :group => :production
 gem "dm-postgres-adapter", :group => :production
 gem "dm-postgres-adapter", :group => :development
+# gem "dm-sqlite-adapter", :group => :development
 gem 'shotgun', "0.9"
 gem "cucumber", "1.2.1"
 gem "capybara", "1.1.2"
