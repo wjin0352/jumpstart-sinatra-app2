@@ -1,8 +1,12 @@
 require 'sinatra'
+require 'data_mapper'
 require 'sinatra/reloader' if development?
 require 'slim'
 require 'sass'
 require './song'
+
+DataMapper.setup(:default, 'postgres://localhost/sinatra1')
+# DataMapper.finalize.auto_upgrade!
 
 configure do
 	enable :sessions
@@ -10,8 +14,8 @@ configure do
 	set :password, 'sinatra'
 end
 
-configure :development do
-	DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+# configure :development do
+# 	DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
 # this creates a file called development.db (if it doesnt already exist)
 # which stores all database information, now lets create our song class
 
@@ -20,7 +24,7 @@ configure :development do
 
 # Dont worry where these configure blocks go, they can go anywhere and have multiples
 # the convention is to have one config block thats near top of the file
-end
+ # end
 
 # configures db for production using postgresql in heroku
 configure :production do
