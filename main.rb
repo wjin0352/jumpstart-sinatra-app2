@@ -1,5 +1,5 @@
 require 'sinatra'
-# require 'sinatra/reloader' if development?
+require 'sinatra/reloader' if development?
 require 'slim'
 require 'sass'
 require './song'
@@ -50,7 +50,7 @@ not_found do
   slim :not_found
 end
 
-
+# login route handler
 get '/login' do
 	slim :login	
 end
