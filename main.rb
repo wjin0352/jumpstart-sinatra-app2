@@ -5,7 +5,7 @@ require 'slim'
 require 'sass'
 require './song'
 
-# DataMapper.setup(:default, 'postgres://localhost/sinatra1')
+DataMapper.setup(:default, 'postgres://localhost/sinatra1')
 # DataMapper.finalize.auto_upgrade!
 
 configure do
@@ -27,9 +27,9 @@ end
  # end
 
 # configures db for production using postgresql in heroku
-configure :production do
-	DataMapper.setup(:default, ENV['DATABASE_URL'])
-end
+# configure :production do
+# 	DataMapper.setup(:default, ENV['DATABASE_URL'])
+# end
 
 
 get('/styles.css'){ scss :styles }
