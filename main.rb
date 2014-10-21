@@ -27,9 +27,9 @@ end
  # end
 
 # configures db for production using postgresql in heroku
-# configure :production do
-# 	DataMapper.setup(:default, ENV['DATABASE_URL'])
-# end
+configure :production do
+	DataMapper.setup(:default, ENV['DATABASE_URL'])
+end
 
 
 get('/styles.css'){ scss :styles }
