@@ -5,7 +5,7 @@ require 'slim'
 require 'sass'
 require './song'
 
-DataMapper.setup(:default, 'postgres://localhost/sinatra1')
+# DataMapper.setup(:default, 'postgres://localhost/sinatra1')
 # DataMapper.finalize.auto_upgrade!
 
 configure do
