@@ -6,7 +6,6 @@ require 'sass'
 require './song'
 
 DataMapper.setup(:default, 'postgres://localhost/sinatra1')
-DataMapper.auto_migrate!
 # DataMapper.finalize.auto_upgrade!
 
 configure do
