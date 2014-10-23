@@ -46,9 +46,17 @@ end
 # TYPE: heroku pg  OR: heroku addons for info about the databse for your app 
 # NOTE: HEROKU_POSTGRESQL_COLOR_URL in app config, will have the URL used for your db
 
+# configure :production do
+# 	DataMapper.setup(:default, ENV['DATABASE_URL'])
+# end
+
 configure :production do
-	DataMapper.setup(:default, ENV['DATABASE_URL'])
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/[HEROKU_POSTGRESQL_AQUA_URL]")
 end
+
+# IMPORTANT NOTE!: YOU MUST AUTOMIGRATE THIS FIRST BY to create our db tables
+# on the terminal, heroku run console, require './main', DataMapper.auto_migrate!
+
 # : heroku logs to find errors, usually if your connected to db, you just need to migrate the data.
 
 get('/styles.css'){ scss :styles }
