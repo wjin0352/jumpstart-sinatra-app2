@@ -15,7 +15,7 @@ require './song'
 configure :development do
 # DataMapper.setup(:default, 'postgres://localhost/sinatraapp1') 
 # DataMapper.finalize.auto_upgrade!
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/mydb")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
  end
 # To get postgres working locally I had to redownload postgres using postgres.app
 # then make sure the paths were correct!!! and check good install
@@ -42,10 +42,14 @@ end
  # end
 
 # configures db for production using postgresql in heroku
-configure :production do
-	DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_CHARCOAL_URL'])
-end
+# TYPE: heroku config to check DATABASE_URL your app is using to connect to db
+# TYPE: heroku pg  OR: heroku addons for info about the databse for your app 
+# NOTE: HEROKU_POSTGRESQL_COLOR_URL in app config, will have the URL used for your db
 
+configure :production do
+	DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_AQUA_URL'])
+end
+# : heroku logs to find errors, usually if your connected to db, you just need to migrate the data.
 
 get('/styles.css'){ scss :styles }
 
