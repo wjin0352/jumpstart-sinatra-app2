@@ -3,13 +3,23 @@ require 'data_mapper'
 require 'sinatra/reloader' if development?
 require 'slim'
 require 'sass'
+require 'do_postgres'
 require './song'
 
-configure :development do
-DataMapper.setup(:default, 'postgres://localhost/sinatra1')
-# DataMapper.finalize.auto_upgrade!
- end
+# Code inside this block is run only once at startup. 
+# You can have as many configure blocks as you like in a 
+# Sinatra app and they can be placed at any point in the code, 
+# but the accepted convention is to use one block and place it 
+# near the start of a file
 
+configure :development do
+# DataMapper.setup(:default, 'postgres://localhost/sinatraapp1') 
+# DataMapper.finalize.auto_upgrade!
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/mydb")
+ end
+# To get postgres working locally I had to redownload postgres using postgres.app
+# then make sure the paths were correct!!! and check good install
+# by creating dbs// psql yourdb  // check notes...
 
 configure do
 	enable :sessions

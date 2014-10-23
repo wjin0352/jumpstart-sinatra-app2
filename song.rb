@@ -1,8 +1,19 @@
 require 'dm-core'
 require 'dm-migrations'
 
+# part2 - defining my models with datamapper
+# Serial type (auto incrementing int)automatically gives a unique key and 
+# generates unique id for each row in db
 
 class Song
+	# include is similar to require, different in that when we say include 
+	# datamapper is a class and::resource is a module in that class
+	# include takes all the functions or methods that are inside resource module 
+	# and makes them class methods inside the user class.  so we can use those methods
+
+	# property method takes : name of field, type
+	# this is datamapper short hand for unique primary key for the database
+
 	include DataMapper::Resource
 	property :id, Serial
 	property :title, String
@@ -11,9 +22,16 @@ class Song
 	property :released_on, Date 
 
 	def released_on=date
-		super Date.strptime(date, '%m/%d/%Y')
+    super Date.strptime(date, '%m/%d/%Y')
 	end
-end
+
+ end
+
+# configure :development do
+# DataMapper.setup(:default, 'postgres://localhost/sinatraapp1') 
+# # DataMapper.finalize.auto_upgrade!
+#  end
+
 
 configure do
 	enable :sessions
@@ -21,7 +39,18 @@ configure do
 	set :password, 'sinatra'
 end
 
+# how do we get datamapper to create this database??
+# 2 methods to do this --> DataMapper.auto_upgrade!   
+# and DataMapper.auto_migrate!
+# auto_migrate! will create a brand new database, even if making a small change
+# it will clear all data out of database there and reinitialize the db in its initial state
+# auto_upgrade! will try and make any changes to the model. 
+
 DataMapper.finalize
+# tells DataMapper to update the database with the tables and
+# fields that we will eventually create in our models, 
+# and then automatically update it if we change anything
+# http://datamapper.org/getting-started.html
 
 get '/songs' do
 	@songs = Song.all
