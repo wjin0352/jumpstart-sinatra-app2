@@ -47,7 +47,7 @@ end
 # NOTE: HEROKU_POSTGRESQL_COLOR_URL in app config, will have the URL used for your db
 
 configure :production do
-	DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_AQUA_URL'])
+	DataMapper.setup(:default, ENV['DATABASE_URL'])
 end
 # : heroku logs to find errors, usually if your connected to db, you just need to migrate the data.
 
