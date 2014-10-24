@@ -51,7 +51,7 @@ end
 # end
 
 configure :production do
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/[HEROKU_POSTGRESQL_AQUA_URL]")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/[HEROKU_POSTGRESQL_CHARCOAL_URL]")
 end
 
 # IMPORTANT NOTE!: YOU MUST AUTOMIGRATE THIS FIRST BY to create our db tables
