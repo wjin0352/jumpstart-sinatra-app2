@@ -73,8 +73,17 @@ end
 
 get '/contact' do
   @title = "Contact"
+  @js = "mod.js"
 	slim :contact		
 end
+
+post '/contact' do
+		
+		slim :contact
+end
+
+
+
 
 not_found do
   @title = "Not Found"

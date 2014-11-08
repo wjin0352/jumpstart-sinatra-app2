@@ -1,0 +1,13 @@
+form action="/test" method="POST"
+  input type="text" name="task[name]"
+  input.button type="submit" value="comment"
+ 
+	h2 my songs <br>
+
+	ul
+		- @song.each do |ex|
+			li.ex = "id: #{ex.id}"
+			li.ex = "title: #{ex.title}"
+			li.ex = "lyrics: #{ex.lyrics}"
+			li.ex = "length: #{ex.length}"
+			li.ex = "Released Date: #{ex.released_on}"

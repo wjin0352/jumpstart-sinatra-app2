@@ -27,6 +27,21 @@ class Song
 
  end
 
+# NOTE:  Every model MUST have a key to be valid, if a 
+# model has no key, theres no way to id a resource and no way 
+# to update its persistent state within a backend datastore.
+# datamapper wil raise an error incomplete model error when
+# trying to auto migrate a model with no key declared.
+class Contact 
+	include DataMapper::Resource
+	property :id, Serial
+	property :name, String
+	property :body, Text
+	property :released_on, Date
+	property :email, String
+end
+
+
 # configure :development do
 # DataMapper.setup(:default, 'postgres://localhost/sinatraapp1') 
 # # DataMapper.finalize.auto_upgrade!
@@ -57,12 +72,11 @@ get '/songs' do
 	slim :songs
 end
 
-get '/songs/new' do
+get '/songs/new' do  # sends to a form in new_song  that will send by action="url" to post route /songs 
 	halt(401, 'Not Authorized') unless session[:admin]
 	@song = Song.new
 	slim :new_song
 end
-
 
 get '/songs/:id' do
   @song = Song.get(params[:id])
@@ -74,7 +88,9 @@ get '/songs/:id/edit' do
 	slim :edit_song
 end
 
-post '/songs' do
+post '/songs' do   # data sent from from, ends up here and we use the params :song and its id to create new song 
+	# and redirect to another route where it will render a view for us with the info.  Since we cannot
+	# render a view in post 
 	song = Song.create(params[:song])
 	redirect to("/songs/#{song.id}")
 end
@@ -90,16 +106,15 @@ delete '/songs/:id' do
 	redirect to('/songs')
 end
 
+# post '/contact' do
+# 		@sample = Song.all
+# 		slim :contact
+# end
 
-
- 
-
-
-
-
-
-
-
+get '/test' do
+	@song = Song.all
+	slim :new
+end
 
 
 

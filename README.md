@@ -1,3 +1,8 @@
+Move your static files(css/js) into a folder named public. Sinatra looks there with default settings.  Static files are served from the ./public directory. You can specify a different location by setting the :public_folder option:
+	set :public_folder, File.dirname(__FILE__) + '/static'
+
+
+
 POSTGRESQL DB using DataMapper SINATRA
 
 Use postgres.app site to download it, least headache, follow instructions for path etc..
@@ -63,6 +68,13 @@ The create will make and save all at once.
 DEPLOYING TO HEROKU WITH POSTGRESQL
 
 git init…etc
+
+Create a config.ru file, which is a standard convention that Heroku looks for.
+
+		# config.ru
+
+		require './app'
+		run Sinatra::Application
 
 Create the app in terminal :  heroku create
 	# that also makes a remote repo for you called heroku 
