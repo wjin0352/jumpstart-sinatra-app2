@@ -1,9 +1,11 @@
+# require 'sinatra/flash'
 require 'sinatra'
 require 'data_mapper'
 require 'sinatra/reloader' if development?
 require 'slim'
 require 'sass'
 require 'do_postgres'
+require 'pony'
 require './song'
 
 # Code inside this block is run only once at startup. 
@@ -53,6 +55,45 @@ end
 configure :production do
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/[HEROKU_POSTGRESQL_CHARCOAL_URL]")
 end
+
+# helper method called css, accepts any # of arguments signified by * 
+# the arguments are filename of stylesheets w/out the .css extension given as strings or symbols
+helpers do
+	def css(*stylesheets)
+		stylesheets.map do |stylesheet|
+			"<link href=\" /#{stylesheet}.css\" media=\"screen, projection\" rel=\"stylesheet\" />"
+		end.join
+	end
+
+	def current?(path='/')
+    (request.path==path || request.path==path+'/') ? "current" : nil
+	end
+
+	def set_title
+		@title ||= "Songs By Sinatra"
+	end
+
+	def send_message
+	  Pony.mail(
+		:from => params[:name] + "<" + params[:email] + ">", 
+		:to => 'daz@gmail.com',
+		:subject => params[:name] + " has contacted you", 
+		:body => params[:message],
+		    :port => '587',
+		    :via => :smtp,
+		    :via_options => {
+					:address => 'smtp.gmail.com', 
+					:port => '587', 
+					:enable_starttls_auto => true,
+					:user_name => 'daz',
+					:password  => 'secret',
+					:authentication  => :plain,
+					:domain  => 'localhost.localdomain'
+					}) 
+	end				
+					
+end
+
 
 # IMPORTANT NOTE!: YOU MUST AUTOMIGRATE THIS FIRST BY to create our db tables
 # on the terminal, heroku run console, require './main', DataMapper.auto_migrate!
@@ -121,6 +162,11 @@ end
 
 get '/get/hello' do
 	"Hello #{session[:name]}"
+end
+
+post '/contact' do
+	send_message
+	redirect to('/')
 end
 
 # we enabled sessions in the config block above, now we need a login route handler that 

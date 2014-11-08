@@ -41,6 +41,22 @@ class Contact
 	property :email, String
 end
 
+module SongHelpers
+	def find_songs
+		@songs = Song.all
+	end
+
+	def find_song
+		Song.get(params[:id])
+	end
+
+	def create_song
+		@song = Song.create(params[:song])
+	end
+end
+
+helpers SongHelpers
+
 
 # configure :development do
 # DataMapper.setup(:default, 'postgres://localhost/sinatraapp1') 
@@ -68,7 +84,7 @@ DataMapper.finalize
 # http://datamapper.org/getting-started.html
 
 get '/songs' do
-	@songs = Song.all
+	find_songs
 	slim :songs
 end
 
@@ -79,30 +95,30 @@ get '/songs/new' do  # sends to a form in new_song  that will send by action="ur
 end
 
 get '/songs/:id' do
-  @song = Song.get(params[:id])
+  @song = find_song
   slim :show_song
 end
 
 get '/songs/:id/edit' do
-	@song = Song.get(params[:id])
+	@song = find_song
 	slim :edit_song
 end
 
 post '/songs' do   # data sent from from, ends up here and we use the params :song and its id to create new song 
 	# and redirect to another route where it will render a view for us with the info.  Since we cannot
 	# render a view in post 
-	song = Song.create(params[:song])
+	song = create_song
 	redirect to("/songs/#{song.id}")
 end
 
 put '/songs/:id' do
-	song = Song.get(params[:id])
+	song = find_song
 	song.update(params[:song])
 	redirect to("/songs/#{song.id}")
 end
 
 delete '/songs/:id' do
-	Song.get(params[:id]).destroy
+	find_song.destroy
 	redirect to('/songs')
 end
 
