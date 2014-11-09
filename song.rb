@@ -127,10 +127,10 @@ end
 # 		slim :contact
 # end
 
-get '/test' do
-	@song = Song.all
-	slim :new
-end
+# get '/test' do
+# 	@song = Song.all
+# 	slim :new
+# end
 
 
 

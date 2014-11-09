@@ -6,6 +6,8 @@ require 'slim'
 require 'sass'
 require 'do_postgres'
 require 'pony'
+require 'v8'
+require 'coffee-script'
 require './song'
 
 # Code inside this block is run only once at startup. 
@@ -101,6 +103,7 @@ end
 # : heroku logs to find errors, usually if your connected to db, you just need to migrate the data.
 
 get('/styles.css'){ scss :styles }
+get('/javascripts/application.js'){ coffee :application }
 
 get '/' do
   @title = "Home"
