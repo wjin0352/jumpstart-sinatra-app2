@@ -14,6 +14,8 @@ gem 'do_postgres'
 gem "pg"
 gem "dm-postgres-adapter"
 
+gem "sinatra-flash"
+gem "pony"
 gem "coffee-script"
 gem "therubyracer"
 
