@@ -2,6 +2,8 @@
 	p Nobody likes this song so far!
 - if @song.likes == 1
 	p This song has been liked once
+- if @song.likes == 2 
+	javascript: alert('this song is getting popular!')
 - if @song.likes > 1
 	p This song has been liked #{@song.likes} times
 	
